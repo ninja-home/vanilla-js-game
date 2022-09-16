@@ -38,11 +38,14 @@ export function documentReady() {
     }, timeout);
   }
 
+  const debouncedPlayMole = debounce(playMoles, DEBOUNCE_TIME);
+
   function startGame() {
     elapsed = 0;
     clicks = 0;
     document.getElementById('message').innerHTML = '';
 
+    gameTimer = setInterval(debouncedPlayMole, TIME_INTERVAL);
     timer = setInterval(() => {
       elapsed++;
       document.getElementById('elapsed').innerHTML = `Elapsed time: ${elapsed} seconds`;
